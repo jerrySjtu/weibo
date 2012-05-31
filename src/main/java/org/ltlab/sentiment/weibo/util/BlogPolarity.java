@@ -1,5 +1,5 @@
 package org.ltlab.sentiment.weibo.util;
 
-public enum Polarity {
+public enum BlogPolarity {
 	POS, NEG, OTHER
 }
