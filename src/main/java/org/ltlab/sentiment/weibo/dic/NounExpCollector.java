@@ -23,23 +23,24 @@ import org.ltlab.sentiment.weibo.util.NounExp;
 import org.ltlab.sentiment.weibo.util.NounExpType;
 import org.ltlab.sentiment.weibo.util.PropertyReader;
 
+
 /**
  * 
- * Àà¹¦ÄÜ: ´Ó²»Í¬µÄÊı¾İÔ´ÖĞÊÕ¼¯Ãû´Ê
+ * ç±»åŠŸèƒ½: ä»ä¸åŒçš„æ•°æ®æºä¸­æ”¶é›†åè¯
  *
  * @author Qiang Wang
  * email: wangqiang.1988@yahoo.com.cn
  *
- * 2012-5-25 ÏÂÎç9:48:21
+ * 2012-5-25 ä¸‹åˆ9:48:21
  *
  */
 public class NounExpCollector {
 	private static final List<String> POS_ADJS = posAdjs();
 	private static final List<String> NEG_ADJS = negAdjs();
-	//µ±½á¹û±È½ÏÉÙÊ±£¬¡°Ô¼¡±²»´æÔÚ
-	private static Pattern resultPattern = Pattern.compile("ÕÒµ½Ïà¹Ø½á¹ûÔ¼?[0-9,]+¸ö");
+	//å½“ç»“æœæ¯”è¾ƒå°‘æ—¶ï¼Œâ€œçº¦â€ä¸å­˜åœ¨
+	private static Pattern resultPattern = Pattern.compile("æ‰¾åˆ°ç›¸å…³ç»“æœçº¦?[0-9,]+ä¸ª");
 	private static Pattern numPattern = Pattern.compile("[0-9,]+");
-	//Ïß³Ì³ØµÄÏß³ÌÊıÄ¿
+	//çº¿ç¨‹æ± çš„çº¿ç¨‹æ•°ç›®
 	private static final int NTHREDS = 6;
 	
 	
@@ -50,8 +51,8 @@ public class NounExpCollector {
 	
 	/**
 	 * 
-	 * @param nouns ĞèÒªÅĞ¶¨ÇãÏòĞÔµÄÃû´Ê
-	 * ÅĞ¶¨Ãû´ÊµÄÇãÏòĞÔ£¬²¢½«½á¹û´æ´¢µ½ÅäÖÃÎÄ¼şÖÆ¶¨µÄÎÄ¼şÖĞ
+	 * @param nouns éœ€è¦åˆ¤å®šå€¾å‘æ€§çš„åè¯
+	 * åˆ¤å®šåè¯çš„å€¾å‘æ€§ï¼Œå¹¶å°†ç»“æœå­˜å‚¨åˆ°é…ç½®æ–‡ä»¶åˆ¶å®šçš„æ–‡ä»¶ä¸­
 	 */
 	private static void storeNounExp(Set<String> nouns) {
 		ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
@@ -59,7 +60,7 @@ public class NounExpCollector {
 			Runnable task = new NounExpTask(noun);
 			executor.execute(task);
 		}
-		//¹Ø±ÕÏß³Ì³Ø
+		//å…³é—­çº¿ç¨‹æ± 
 		executor.shutdown();
 		while (executor.isTerminated() == false) {}
 		System.out.println("all nouns are calculated!");
@@ -67,8 +68,8 @@ public class NounExpCollector {
 	
 	/**
 	 *  
-	 * @param noun ĞèÒªÅĞ¶¨µÄÃû´Ê
-	 * @return ¸ÃÃû´ÊµÄÇãÏòĞÔ
+	 * @param noun éœ€è¦åˆ¤å®šçš„åè¯
+	 * @return è¯¥åè¯çš„å€¾å‘æ€§
 	 */
 	public static NounExp getNounExp(String noun) {
 		List<String> posQueries = getQueries(noun, POS_ADJS);
@@ -95,8 +96,8 @@ public class NounExpCollector {
 	
 	/**
 	 * 
-	 * @param query °üº¬ÌØ¶¨Ãû´ÊµÄ²éÑ¯
-	 * @return ¸Ã²éÑ¯ÔÚ°Ù¶ÈÉÏ·µ»ØµÄ½á¹ûÊı
+	 * @param query åŒ…å«ç‰¹å®šåè¯çš„æŸ¥è¯¢
+	 * @return è¯¥æŸ¥è¯¢åœ¨ç™¾åº¦ä¸Šè¿”å›çš„ç»“æœæ•°
 	 * @throws  
 	 */
 	private static int queryHit(String query) {
@@ -110,9 +111,9 @@ public class NounExpCollector {
 			String line;
 			while ((line = br.readLine()) != null) {
 				Matcher rm = resultPattern.matcher(line);
-				//µÃµ½°üº¬½á¹ûÊıµÄĞĞ
+				//å¾—åˆ°åŒ…å«ç»“æœæ•°çš„è¡Œ
 				if (rm.find()) {
-					//µÃµ½½á¹ûÊıÄ¿
+					//å¾—åˆ°ç»“æœæ•°ç›®
 					Matcher nm = numPattern.matcher(rm.group());
 					if (nm.find()) 
 						num = parseInt(nm.group());
@@ -133,15 +134,15 @@ public class NounExpCollector {
 	
 	/**
 	 *  
-	 * @param query ²éÑ¯µÄ¹Ø¼ü´Ê
-	 * @return httpÇëÇóµÄURL
+	 * @param query æŸ¥è¯¢çš„å…³é”®è¯
+	 * @return httpè¯·æ±‚çš„URL
 	 */
 	private static String getBaiduURL(String query) {
 		StringBuilder sb = new StringBuilder();
 		//sb.append("http://www.baidu.com/s?wd=");
 		sb.append("http://www.baidu.com/s?q1=&q2=");
 		try {
-		    //°Ù¶È¸ß¼¶²éÑ¯²ÉÓÃGBK±àÂë
+		    //ç™¾åº¦é«˜çº§æŸ¥è¯¢é‡‡ç”¨GBKç¼–ç 
 			sb.append(URLEncoder.encode(query, "GBK"));
 			sb.append("&q3=&q4=&rn=10&lm=0&ct=0&ft=&q5=&q6=&tn=baiduadv");
 		} catch (UnsupportedEncodingException e) {
@@ -152,8 +153,8 @@ public class NounExpCollector {
 	
 	/**
 	 * 
-	 * @param str ´øÓĞ¶ººÅµÄÊı×Ö×Ö·û´®
-	 * @return ¸Ã×Ö·û´®´ú±íµÄÊı×Ö
+	 * @param str å¸¦æœ‰é€—å·çš„æ•°å­—å­—ç¬¦ä¸²
+	 * @return è¯¥å­—ç¬¦ä¸²ä»£è¡¨çš„æ•°å­—
 	 */
 	private static int parseInt(String numStr) {
 		String[] strs = numStr.split(",");
@@ -165,23 +166,23 @@ public class NounExpCollector {
 	
 	/**
 	 * 
-	 * @param noun Òª²éÑ¯µÄÃû´Ê
-	 * @param adjs ´îÅäµÄĞÎÈİ´Ê
-	 * @return °´ÕÕÉè¶¨µÄÄ£Ê½Éú³ÉµÄ²éÑ¯
+	 * @param noun è¦æŸ¥è¯¢çš„åè¯
+	 * @param adjs æ­é…çš„å½¢å®¹è¯
+	 * @return æŒ‰ç…§è®¾å®šçš„æ¨¡å¼ç”Ÿæˆçš„æŸ¥è¯¢
 	 */
 	private static List<String> getQueries(String noun, 
 			List<String> adjs) {
 		List<String> queries = new LinkedList<String>();
 		for (String adj : adjs) {
-			queries.add(noun + "ÓĞµã" + adj);
-			queries.add(noun + "ÓĞµã¶ù" + adj);
-			queries.add(noun + adj + "ÔõÃ´°ì");
-			queries.add("ÏÓ" + noun + adj);
+			queries.add(noun + "æœ‰ç‚¹" + adj);
+			queries.add(noun + "æœ‰ç‚¹å„¿" + adj);
+			queries.add(noun + adj + "æ€ä¹ˆåŠ");
+			queries.add("å«Œ" + noun + adj);
 		}
 		return queries;
 	}
 	
-	//´ÓËÑ¹·×ÖµäÖĞ»ñÈ¡Ãû´Ê
+	//ä»æœç‹—å­—å…¸ä¸­è·å–åè¯
 	private static Set<String> getSougouNouns() {
 		PropertyReader props = new PropertyReader();
 		String dicPath = props.getProp("sougouFreqDic");
@@ -192,7 +193,7 @@ public class NounExpCollector {
 			String line;
 			while ((line = br.readLine()) != null) {
 				String[] strs = line.split("\t");
-				//´ÊÓïµÄ´ÊĞÔĞÅÏ¢ÊÇÍêÕûµÄ
+				//è¯è¯­çš„è¯æ€§ä¿¡æ¯æ˜¯å®Œæ•´çš„
 				if (strs.length == 3) {
 					String[] attrs = strs[2].split(",");
 					boolean flag = false;
@@ -215,27 +216,27 @@ public class NounExpCollector {
 		return nounSet;
 	}
 	
-	//positive-likeĞÎÈİ´ÊÁĞ±í
+	//positive-likeå½¢å®¹è¯åˆ—è¡¨
 	private static List<String> posAdjs() {
 		List<String> posAdjs = new LinkedList<String>();
-		posAdjs.add("´ó");
-		posAdjs.add("¶à");
-		posAdjs.add("¸ß");
-		posAdjs.add("Éî");
-		posAdjs.add("ÖØ");
-		posAdjs.add("ºñ");
+		posAdjs.add("å¤§");
+		posAdjs.add("å¤š");
+		posAdjs.add("é«˜");
+		posAdjs.add("æ·±");
+		posAdjs.add("é‡");
+		posAdjs.add("åš");
 		return posAdjs;
 	}
 
-	//negative-likeĞÎÈİ´ÊÁĞ±í
+	//negative-likeå½¢å®¹è¯åˆ—è¡¨
 	private static List<String> negAdjs() {
 		List<String> negAdjs = new LinkedList<String>();
-		negAdjs.add("Ğ¡");
-		negAdjs.add("ÉÙ");
-		negAdjs.add("µÍ");
-		negAdjs.add("±¡");
-		negAdjs.add("Ç³");
-		negAdjs.add("Çá");
+		negAdjs.add("å°");
+		negAdjs.add("å°‘");
+		negAdjs.add("ä½");
+		negAdjs.add("è–„");
+		negAdjs.add("æµ…");
+		negAdjs.add("è½»");
 		return negAdjs;
 	}
 }

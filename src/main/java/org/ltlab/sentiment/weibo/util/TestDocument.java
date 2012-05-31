@@ -22,7 +22,7 @@ public class TestDocument {
     public ArrayList<Weibo> weibos;
     
     public static void main(String[] args){
-        String path = "E:\\快盘\\王强\\我的数据\\weibo\\an_hui_xiao_xian_che_huo(1-300).xml";
+        String path = "E:";
         TestDocument td = TestDocument.getInstance(path);
         List<Weibo> weibos = td.weibos;
     }

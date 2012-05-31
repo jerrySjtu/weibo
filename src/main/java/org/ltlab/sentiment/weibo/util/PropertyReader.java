@@ -9,12 +9,12 @@ import java.util.Properties;
 
 /**
  * 
- * Àà¹¦ÄÜ: ¶ÁÈ¡ÅäÖÃÎÄ¼şÖĞµÄÅäÖÃ
+ * ç±»åŠŸèƒ½: è¯»å–é…ç½®æ–‡ä»¶ä¸­çš„é…ç½®
  *
  * @author Qiang Wang
  * email: wangqiang.1988@yahoo.com.cn
  *
- * 2012-5-25 ÏÂÎç9:53:49
+ * 2012-5-25 ä¸‹åˆ9:53:49
  *
  */
 public class PropertyReader {

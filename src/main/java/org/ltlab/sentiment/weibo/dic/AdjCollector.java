@@ -12,7 +12,7 @@ import java.util.Set;
 import org.ltlab.sentiment.weibo.util.PropertyReader;
 
 /**
- * ¹¦ÄÜÃèÊö: ÊÕ¼¯ÆğĞŞÊÎ×÷ÓÃµÄĞÎÈİ´ÊºÍÃû´Ê
+ * åŠŸèƒ½æè¿°: æ”¶é›†èµ·ä¿®é¥°ä½œç”¨çš„å½¢å®¹è¯å’Œåè¯
  * <p>
  * 
  * @author : qiang.wang
@@ -22,25 +22,25 @@ import org.ltlab.sentiment.weibo.util.PropertyReader;
  */
 public class AdjCollector
 {
-    // ¸ºÃæÆÀ¼Û´Ê
+    // è´Ÿé¢è¯„ä»·è¯
     private static final Set<String> NEG_COMM_WORDS = getNegCommWords();
-    // ¸ºÃæÆÀ¼Û´ÊÆ´Òô
+    // è´Ÿé¢è¯„ä»·è¯æ‹¼éŸ³
     private static Set<String> NEG_COMM_PINYINS;
-    // ¸ºÃæÇé¸Ğ´Ê
+    // è´Ÿé¢æƒ…æ„Ÿè¯
     private static Set<String> NEG_SE_WORDS;
-    // ¸ºÃæÇé¸Ğ´ÊÆ´Òô
+    // è´Ÿé¢æƒ…æ„Ÿè¯æ‹¼éŸ³
     private static Set<String> NEG_SE_PINYINS;
-    // ÕıÃæÆÀ¼Û´Ê
+    // æ­£é¢è¯„ä»·è¯
     private static Set<String> POS_COMM_WORDS;
-    // ÕıÃæÆÀ¼Û´ÊÆ´Òô
+    // æ­£é¢è¯„ä»·è¯æ‹¼éŸ³
     private static Set<String> POS_COMM_PINYINS;
-    // ÕıÃæÇé¸Ğ´Ê
+    // æ­£é¢æƒ…æ„Ÿè¯
     private static Set<String> POS_SE_WORDS;
-    // ÕıÃæÇé¸Ğ´ÊÆ´Òô
+    // æ­£é¢æƒ…æ„Ÿè¯æ‹¼éŸ³
     private static Set<String> POS_SE_PINYINS;
     
     public static Set<String> getNegCommWords() {
-        //¸ºÃæÆÀ¼Û´Ê4000×óÓÒ
+        //è´Ÿé¢è¯„ä»·è¯4000å·¦å³
         Set<String> negCommWords = new HashSet<String>(4000); 
         PropertyReader props = new PropertyReader();
         String pathname = props.getProp("negCommWords");

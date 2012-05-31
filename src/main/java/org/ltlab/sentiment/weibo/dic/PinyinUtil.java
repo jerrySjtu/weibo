@@ -13,7 +13,7 @@ import org.ltlab.sentiment.weibo.util.PropertyReader;
 
 /**
  * 
- * ¹¦ÄÜÃèÊö: µÃµ½Ã¿¸öºº×ÖµÄ¶ÁÒô  <p>
+ * åŠŸèƒ½æè¿°: å¾—åˆ°æ¯ä¸ªæ±‰å­—çš„è¯»éŸ³  <p>
  * 
  *
  * @author : qiang.wang <p>
@@ -28,7 +28,7 @@ public class PinyinUtil
     private static Map<String, List<String>> charToPinyinMap;
     
     public static void main(String[] args) {
-        Map<String, List<String>> map = getPinyinDic();
+        Map<String, List<String>> map = getPinyinToCharDic();
         System.out.println(map.size());
     }
     
@@ -45,9 +45,9 @@ public class PinyinUtil
             while ((line = br.readLine()) != null) {
                 if (line.contains(":")) {
                     String[] strs = line.split(":");
-                    //Æ´Òô
+                    //æ‹¼éŸ³
                     String pinyin = strs[0].substring(0, strs[0].length()-1);
-                    //ºº×Ö
+                    //æ±‰å­—
                     for (char c : strs[1].toCharArray())
                     {
                         if (pinyinMap.containsKey(c)) {
@@ -72,7 +72,7 @@ public class PinyinUtil
         return pinyinMap;
     }
     
-    //½¨Á¢´Óºº×Öµ½Æ´ÒôµÄhash±í
+    //å»ºç«‹ä»æ±‰å­—åˆ°æ‹¼éŸ³çš„hashè¡¨
     private static Map<String, List<String>> getcharToPinyinDic() {
         Map<String, List<String>> pinyinMap = 
             new HashMap<String, List<String>>();
@@ -86,9 +86,9 @@ public class PinyinUtil
             while ((line = br.readLine()) != null) {
                 if (line.contains(":")) {
                     String[] strs = line.split(":");
-                    //Æ´Òô
+                    //æ‹¼éŸ³
                     String pinyin = strs[0].substring(0, strs[0].length()-1);
-                    //ºº×Ö
+                    //æ±‰å­—
                     for (char c : strs[1].toCharArray())
                     {
                         if (pinyinMap.containsKey(c)) {

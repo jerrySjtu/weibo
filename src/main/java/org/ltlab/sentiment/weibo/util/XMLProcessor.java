@@ -60,7 +60,7 @@ public class XMLProcessor {
 				String nodeN = nodeE.getNodeName();
 				String txt = nodeE.getTextContent();
 				if (nodeN.equals("pubtime")) {
-					txt = txt.replaceAll("(\\d{4}Äê\\d{2}ÔÂ\\d{2}ÈÕ)\\s*(\\d{2}:\\d{2})(:\\d{2})?", "$1 $2");
+					txt = txt.replaceAll("(\\d{4}å¹´\\d{2}æœˆ\\d{2}æ—¥)\\s*(\\d{2}:\\d{2})(:\\d{2})?", "$1 $2");
 				}
 				Element newE = dstDoc.createElement(nodeN);
 				newE.setTextContent(txt);
