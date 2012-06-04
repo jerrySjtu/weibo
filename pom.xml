@@ -8,6 +8,15 @@
 	<description>微博情感评测</description>
 	<packaging>jar</packaging>
 
+	<dependencies>
+		<!-- stanford nlp segmenter -->
+		<dependency>
+			<groupId>org.stanford.nlp</groupId>
+			<artifactId>segmenter</artifactId>
+			<version>1.6.5</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<!-- compile with jdk 1.6 -->

@@ -18,21 +18,21 @@ import org.w3c.dom.NodeList;
  *
  * @author ucai
  */
-public class TestDocument {
+public class BlogDocument {
     public ArrayList<Weibo> weibos;
     
     public static void main(String[] args){
         String path = "E:";
-        TestDocument td = TestDocument.getInstance(path);
+        BlogDocument td = BlogDocument.getInstance(path);
         List<Weibo> weibos = td.weibos;
     }
 
-    public TestDocument(){
+    public BlogDocument(){
         weibos = new ArrayList<Weibo>();
     }
 
-    public static TestDocument getInstance(String xmlPath){
-        TestDocument td = new TestDocument();
+    public static BlogDocument getInstance(String xmlPath){
+        BlogDocument td = new BlogDocument();
         try{
             XMLProcessor p = XMLProcessor.getInstance();
             Document d = p.getXmlDocument(xmlPath);
